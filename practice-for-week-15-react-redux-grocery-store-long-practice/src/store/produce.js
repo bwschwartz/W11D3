@@ -22,5 +22,3 @@ export const populateProduce = {
   type: POPULATE,
   produce: produceData
 }
-
-
