@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 import Cart from './components/Cart';
 import ProduceList from './components/ProduceList';
 import {populateProduce} from './store/produce.js';
+import {addProduceToCart} from './store/cart.js'
 
 function App() {
   const [showCart, setShowCart] = useState(false);
@@ -10,6 +11,7 @@ function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(populateProduce);
+    dispatch(addProduceToCart(5));
   }, [dispatch]);
 
   return (
