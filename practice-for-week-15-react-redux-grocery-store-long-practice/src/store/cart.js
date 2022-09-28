@@ -12,23 +12,33 @@ export default function cartReducer (state = {}, action) {
          }
       }
       return newState;
-      case REMOVEPRODUCE:
-        // const filteredState = {}
-        // const keysArray = Object.keys(state);
-        // for (let i = 0; i < keysArray.length; i++) {
-        //   const key = parseInt(keysArray[i]);
-        //   if (key !== action.produceId) {
-        //     filteredState[key] = state[key];
-        //   }
-        // }
-        // return filteredState;
-        const filteredState = {...state}
-        delete filteredState[action.produceId];
-        return filteredState;
+
+    case REMOVEPRODUCE:
+      const filteredState = {...state};
+      delete filteredState[action.produceId];
+      return filteredState;
+
+    case UPDATECOUNT:
+      const updatedState = {...state};
+      updatedState[action.produceId].count+=action.amt;
+      return updatedState;
+
+    case CLEARCART:
+      return {};
+
     default:
       return state;
   }
 }
+
+const UPDATECOUNT = 'cart/UPDATE'
+export const updateCountInCart = (produceId, amt) => {
+  return {
+    type: UPDATECOUNT,
+    produceId: produceId,
+    amt: amt
+  };
+};
 
 const ADDPRODUCE = 'cart/ADD'
 export const addProduceToCart = (produceId) => {
@@ -45,3 +55,11 @@ export const removeProduceFromCart = (produceId) => {
     produceId: produceId
   };
 };
+
+const CLEARCART = 'cart/CLEAR'
+export const clearCart = () => {
+  return {
+    type: CLEARCART
+  };
+};
+

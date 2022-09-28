@@ -10,6 +10,11 @@ export default function produceReducer (state = {}, action) {
       });
       return actionProduceObject
 
+    case TOGGLE:
+      const toggledState = {...state};
+      toggledState[action.produceId].liked = !toggledState[action.produceId].liked;
+      return toggledState;
+
     default:
       return state;
 
@@ -22,3 +27,9 @@ export const populateProduce = {
   type: POPULATE,
   produce: produceData
 }
+
+const TOGGLE = 'produce/TOGGLE'
+export const toggleLike = (produceId) => ({
+  type: TOGGLE,
+  produceId: produceId
+})
